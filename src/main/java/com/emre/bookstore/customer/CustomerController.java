@@ -1,13 +1,12 @@
 package com.emre.bookstore.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "api/v1/customer")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -18,7 +17,17 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getUsers() {
+    public List<Customer> getCustomer() {
         return this.customerService.getCustomers();
+    }
+
+    @PostMapping
+    public void registerCustomer(@RequestBody Customer customer) {
+        customerService.addCustomer(customer);
+    }
+
+    @DeleteMapping(path = "{customerId}")
+    public void deleteCustomer(@PathVariable("customerId") Long customerId) {
+        customerService.deleteCustomer(customerId);
     }
 }

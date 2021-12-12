@@ -2,6 +2,7 @@ package com.emre.bookstore.customer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -12,6 +13,8 @@ public class Customer {
     private String username;
     private LocalDate dob;
     private String email;
+    @Transient
+    private Integer age;
 
     public Customer() {
 
@@ -60,6 +63,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears();
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
