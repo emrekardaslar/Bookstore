@@ -1,9 +1,13 @@
 package com.emre.bookstore.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/v1/book")
@@ -17,18 +21,28 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getBooks() {
-        return bookService.getBooks();
+    public ResponseEntity<List<Book>> getBooks() {
+        return new ResponseEntity<>(bookService.getBooks(), HttpStatus.OK);
     }
 
     @PostMapping
-    public void addBook(@RequestBody Book book) {
-        bookService.addBook(book);
+    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+        return new ResponseEntity<Book>(bookService.addBook(book), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{bookId}")
-    public void deleteBook(@PathVariable("bookId") Long bookId) {
-        bookService.deleteBook(bookId);
+    public ResponseEntity<?> deleteBook(@PathVariable("bookId") Long bookId) {
+        try {
+            return new ResponseEntity<Book>(bookService.deleteBook(bookId), HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            Map<String, Object> body = new LinkedHashMap<>();
+            body.put("status", "400");
+            body.put("message", "No book to delete with " + bookId);
+            return new ResponseEntity<Object>(body, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 }

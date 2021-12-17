@@ -20,7 +20,7 @@ export class BookService {
     return this.http.get<Book>(`${this.apiServerUrl}/api/v1/book/${id}`); 
   }
 
-  createBook(book: Book): Observable<Book> {
+  addBook(book: Book): Observable<Book> {
     return this.http.post<Book>(`${this.apiServerUrl}/api/v1/book`, book);
   }
 

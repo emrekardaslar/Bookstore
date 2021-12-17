@@ -20,12 +20,18 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddBookDialogComponent } from './components/add-book-dialog/add-book-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainNavComponent,
-    MatConfirmDialogComponent
+    MatConfirmDialogComponent,
+    AddBookDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [BookService],
   bootstrap: [AppComponent]

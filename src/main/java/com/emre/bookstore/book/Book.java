@@ -8,10 +8,12 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String author;
-    private double price;
-    private int amount;
+    private double price = 0;
+    private int amount = 0;
 
     public Book() {
     }

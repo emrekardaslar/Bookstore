@@ -25,13 +25,7 @@ export class HomeComponent implements OnInit {
     private dialogService: DialogService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe(books => {
-      this.books = books;
-      this.dataSource = new MatTableDataSource<Book>(this.books);
-      this.dataSource.paginator =  this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-
+    this.loadBooks();
   }
 
   ngAfterViewInit() {
@@ -60,6 +54,27 @@ export class HomeComponent implements OnInit {
         this.dataSource.paginator =  this.paginator;
         this.dataSource.sort = this.sort;
       }); 
+    });
+  }
+
+  addBook() {
+    this.dialogService.openAddBookDialog().afterClosed().subscribe((res: Book) => {
+      if (res) {
+        this.bookService.addBook(res).subscribe(
+          () => {
+            this.loadBooks();
+          }
+        );
+      }
+    });
+  }
+
+  loadBooks() {
+    this.bookService.getBooks().subscribe(books => {
+      this.books = books;
+      this.dataSource = new MatTableDataSource<Book>(this.books);
+      this.dataSource.paginator =  this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 

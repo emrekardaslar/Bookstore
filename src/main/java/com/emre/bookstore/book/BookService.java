@@ -20,22 +20,24 @@ public class BookService {
     }
 
 
-    public void addBook(Book book) {
+    public Book addBook(Book book) {
         Optional<Book> bookOptional = bookRepository.findBookByName(book.getName());
         if (bookOptional.isPresent()) {
             throw new IllegalStateException("book is already in db");
         }
 
         this.bookRepository.save(book);
+        return book;
     }
 
-    public void deleteBook(Long id) {
+    public Book deleteBook(Long id) {
         boolean exists = bookRepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("book with id " + " does not exists");
         }
-
+        Book bookToDelete = bookRepository.findBookById(id);
         bookRepository.deleteById(id);
+        return bookToDelete;
     }
 
 }
