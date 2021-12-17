@@ -41,7 +41,7 @@
     <tr>
       <td mat-cell *matCellDef="let row" style="width:20%">
         <button mat-icon-button color="warn" (click)="deleteBook(row.id)" title="View Contact"><mat-icon>delete</mat-icon></button>
-        <button mat-icon-button color="primary" title="Edit Contact"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="editBook(row)"><mat-icon>edit</mat-icon></button>
       </td>
     <tr>
   </ng-container>

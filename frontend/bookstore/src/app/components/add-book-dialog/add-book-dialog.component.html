@@ -1,21 +1,27 @@
 <form [formGroup]="bookForm"(ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
+        <input type="text" matInput formControlName="name" />
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Author</mat-label>
-        <input matInput formControlName="author" />
+        <input type="text" matInput formControlName="author" />
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Price</mat-label>
-        <input matInput formControlName="price" />
+        <input type="number" matInput formControlName="price" />
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Amount</mat-label>
-        <input matInput formControlName="amount" />
+        <input type="number" matInput formControlName="amount" />
     </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="addBook()">Add</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="false">Cancel</button>
+    <br>
+    <div style="float: right">
+        <button *ngIf="!isEdit" mat-raised-button color="primary" class="btn" [disabled]="!bookForm.valid" >Add</button> 
+        <button *ngIf="isEdit" mat-raised-button color="primary" class="btn" [disabled]="!bookForm.valid" >Save</button>
+        <button mat-raised-button color="primary" class="btn" [mat-dialog-close]="false">Cancel</button>
+    </div>
 </form>

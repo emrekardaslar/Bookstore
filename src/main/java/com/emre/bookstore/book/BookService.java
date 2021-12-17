@@ -40,4 +40,14 @@ public class BookService {
         return bookToDelete;
     }
 
+    public Book updateBook(Long id, Book newBook) {
+        boolean exists = bookRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("book with id " + " does not exists");
+        }
+
+        bookRepository.save(newBook);
+        return bookRepository.findBookById(id);
+    }
+
 }

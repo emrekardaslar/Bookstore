@@ -69,6 +69,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  editBook(book: Book) {
+    const id: number = book.id;
+    this.dialogService.openEditBookDialog(book).afterClosed().subscribe((res: Book) => {
+      if (res) {
+        res.id = id;
+        this.bookService.updateBook(res).subscribe(
+          () => {
+            this.loadBooks();
+          }
+        );
+      }
+    });
+  }
+
   loadBooks() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;

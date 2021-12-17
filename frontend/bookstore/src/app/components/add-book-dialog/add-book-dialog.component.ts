@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-book-dialog',
@@ -8,8 +8,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-book-dialog.component.scss']
 })
 export class AddBookDialogComponent implements OnInit {
-
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddBookDialogComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,  private fb: FormBuilder, private dialogRef: MatDialogRef<AddBookDialogComponent>) { }
+  isEdit: boolean = false;
   bookForm = this.fb.group ({
     name: ['', Validators.required],
     author: ['', Validators.required],
@@ -18,10 +18,10 @@ export class AddBookDialogComponent implements OnInit {
   })
 
   ngOnInit(): void {
-  }
-
-  addBook() {
-    
+    if (this.data && this.data.book) {
+      this.isEdit = true;
+      this.bookForm.patchValue(this.data.book);
+    }
   }
 
   onSubmit() {

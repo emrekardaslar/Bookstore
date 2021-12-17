@@ -42,7 +42,11 @@ public class BookController {
             body.put("message", "No book to delete with " + bookId);
             return new ResponseEntity<Object>(body, HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @PutMapping(path = "{bookId}")
+    public ResponseEntity<?> updateBook(@PathVariable("bookId") Long bookId, @RequestBody Book newBook) {
+        return new ResponseEntity<>(bookService.updateBook(bookId, newBook), HttpStatus.OK);
     }
 
 }
