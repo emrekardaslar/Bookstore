@@ -16,11 +16,16 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTableModule } from '@angular/material/table'  
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MainNavComponent
+    MainNavComponent,
+    MatConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HttpClientModule,
     LayoutModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [BookService],
   bootstrap: [AppComponent]
