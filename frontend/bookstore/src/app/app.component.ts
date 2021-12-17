@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { routes } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,6 @@ import { routes } from './app.module';
 })
 export class AppComponent {
   title = 'bookstore';
-  routes = routes;
   constructor() { }
 
   onToggleSidenav() {

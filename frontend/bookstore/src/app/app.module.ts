@@ -8,20 +8,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatListModule } from '@angular/material/list';
-export const routes =  [
-  { path: 'accounts', label: 'Accounts' },
-  { path: 'contacts', label: 'Contacts' },
-  { path: 'activities', label: 'Activities' }
- ];
-
+import { HomeComponent } from './components/home/home.component';
+import { BookService } from './services/book.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatTableModule } from '@angular/material/table'  
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
-    NavbarComponent
+    HomeComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +31,12 @@ export const routes =  [
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    HttpClientModule,
+    LayoutModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  providers: [BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
