@@ -64,6 +64,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>bookstore-docker</finalName>
 	</build>
 
 </project>
