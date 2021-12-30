@@ -49,5 +49,7 @@ public class BookService {
         bookRepository.save(newBook);
         return bookRepository.findBookById(id);
     }
-
+    //TODO add validations
+    //TODO add tests
+    //TODO dockerize springboot, angular and postgresql
 }

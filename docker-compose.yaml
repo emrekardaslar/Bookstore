@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     depends_on:
       - postgresqldb
+      - bookstore-frontend
   postgresqldb:
     image: postgres
     ports:
@@ -16,3 +17,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=bookstore
+  bookstore-frontend:
+    image: bookstore-frontend
+    ports:
+      - "4200:4200"
+  #TODO fix angular refresh bug

@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   changeChkState(id: number) {
-    
+    //TODO: Implement
   }
 
   deleteBook(id: number) {
