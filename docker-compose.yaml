@@ -20,5 +20,5 @@ services:
   bookstore-frontend:
     image: bookstore-frontend
     ports:
-      - "4200:4200"
-  #TODO fix angular refresh bug
+      - "4200:80"
+  #TODO add persistence
