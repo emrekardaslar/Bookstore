@@ -4,7 +4,7 @@
         (click)="addCustomer()">
         <mat-icon>add</mat-icon>
     </button>
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <table mat-table style="width: 100%;" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
       <ng-container>
         <mat-icon>add</mat-icon>
       </ng-container>
