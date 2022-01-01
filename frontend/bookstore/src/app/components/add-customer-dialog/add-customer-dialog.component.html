@@ -1,0 +1,22 @@
+<form [formGroup]="customerForm"(ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput formControlName="username" />
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput formControlName="email" />
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Dob</mat-label>
+        <input type="text" matInput formControlName="dob" />
+    </mat-form-field>
+    <br>
+    <div style="float: right">
+        <button *ngIf="!isEdit" mat-raised-button color="primary" class="btn" [disabled]="!customerForm.valid" >Add</button> 
+        <button *ngIf="isEdit" mat-raised-button color="primary" class="btn" [disabled]="!customerForm.valid" >Save</button>
+        <button mat-raised-button color="primary" class="btn" [mat-dialog-close]="false">Cancel</button>
+    </div>
+</form>

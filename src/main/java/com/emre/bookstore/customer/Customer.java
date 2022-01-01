@@ -20,10 +20,17 @@ public class Customer {
 
     }
 
-    public Customer(Long id, String username, String email, LocalDate dob) {
+//    public Customer(Long id, String username, String email, LocalDate dob) {
+//        this.id = id;
+//        this.username = username;
+//        this.dob = dob;
+//        this.email = email;
+//    }
+
+    public Customer(Long id, String username, String email, String dob) {
         this.id = id;
         this.username = username;
-        this.dob = dob;
+        this.dob = LocalDate.parse(dob);
         this.email = email;
     }
 

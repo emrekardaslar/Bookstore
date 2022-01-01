@@ -25,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { CustomersComponent } from './components/customers/customers.component';
+import { AddCustomerDialogComponent } from './components/add-customer-dialog/add-customer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     HomeComponent,
     MainNavComponent,
     MatConfirmDialogComponent,
-    AddBookDialogComponent
+    AddBookDialogComponent,
+    CustomersComponent,
+    AddCustomerDialogComponent
   ],
   imports: [
     BrowserModule,

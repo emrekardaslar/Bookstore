@@ -1,6 +1,8 @@
 package com.emre.bookstore.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,8 +25,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void registerCustomer(@RequestBody Customer customer) {
-        customerService.addCustomer(customer);
+    public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) {
+        return new ResponseEntity<Customer>(customerService.addCustomer(customer), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{customerId}")
@@ -33,13 +35,11 @@ public class CustomerController {
     }
 
     @PutMapping(path = "{customerId}")
-    public void updateCustomer(
+    public ResponseEntity<?> updateCustomer(
             @PathVariable("customerId") Long customerId,
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String dob) {
+            @RequestBody Customer newCustomer) {
 
-        customerService.updateCustomer(customerId, username, email, dob);
+        return new ResponseEntity<>(customerService.updateCustomer(customerId, newCustomer), HttpStatus.OK);
     }
 
 }

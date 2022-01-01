@@ -1,6 +1,7 @@
 package com.emre.bookstore.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +23,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(customer.getEmail());
 
         if (customerOptional.isPresent()) {
@@ -30,6 +31,7 @@ public class CustomerService {
         }
 
         customerRepository.save(customer);
+        return customer;
     }
 
     public void deleteCustomer(Long id) {
@@ -42,28 +44,13 @@ public class CustomerService {
     }
 
     @Transactional
-    public void updateCustomer(Long customerId, String username, String email, String dob) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new IllegalStateException("customer with id " + customerId + "does not exists" ));
-
-        if (username != null && username.length() > 0
-        && !Objects.equals(customer.getUsername(), username)) {
-            customer.setUsername(username);
+    public Optional<Customer> updateCustomer(Long customerId, Customer newCustomer) {
+        boolean exists = customerRepository.existsById(customerId);
+        if (!exists) {
+            throw new IllegalStateException("book with id " + " does not exists");
         }
-
-        if (email != null && email.length() > 0
-        && !Objects.equals(customer.getEmail(), email)) {
-            Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(email);
-
-            if (customerOptional.isPresent()) {
-                throw new IllegalStateException("email taken");
-            }
-
-            customer.setEmail(email);
-        }
-
-        if (dob != null && !Objects.equals(customer.getDob(), LocalDate.parse(dob))) {
-            customer.setDob(LocalDate.parse(dob));
-        }
+        newCustomer.setId(customerId);
+        customerRepository.save(newCustomer);
+        return customerRepository.findById(customerId);
     }
 }
