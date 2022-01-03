@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   books: Book[] = [];
   displayedColumns: string[] = ['id', 'name', 'author', 'price', 'amount', 'action'];
   dataSource: any = new MatTableDataSource<Book>(this.books);
+  checkedRows: any[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -42,7 +43,38 @@ export class HomeComponent implements OnInit {
   }
 
   changeChkState(id: number) {
-    //TODO: Implement
+    if (this.checkedRows.includes(id)) {
+      this.checkedRows = this.checkedRows.filter(item => item !== id);
+    } else {
+      this.checkedRows.push(id);
+    }
+  }
+
+  deleteSelectedBooks() { 
+    this.dialogService.openConfirmDialog()
+      .afterClosed().subscribe((res:any) => {
+        if (res) {
+         this.checkedRows.forEach((id:any) => {
+            this.bookService.deleteBook(id).subscribe(() => {
+              this.books = this.books.filter(book => book.id !== id);
+              this.dataSource = new MatTableDataSource<Book>(this.books);
+              this.dataSource.paginator =  this.paginator;
+              this.dataSource.sort = this.sort;
+              this.checkedRows = [];
+            });
+          }
+        );
+        }
+      });
+  }
+
+  selectAllWithToggle() {
+    if (this.checkedRows.length == this.books.length) {
+      this.checkedRows = [];
+    } else {
+      this.checkedRows = this.books.map(book => book.id);
+    }
+    //TODO add visual update on checkboxes
   }
 
   deleteBook(id: number) {

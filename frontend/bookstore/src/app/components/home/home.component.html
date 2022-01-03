@@ -1,9 +1,22 @@
 <div class="mat-elevation-z8" style="width: 100%; margin-top: 1%;">
+
+  <button mat-icon-button color="primary" 
+    style="float: left; background-color: white;"
+    (click)="selectAllWithToggle()">
+    <mat-icon>check_box</mat-icon>
+</button>
+
 <button mat-icon-button color="primary" 
     style="float: right; background-color: white;"
     (click)="addBook()">
     <mat-icon>add</mat-icon>
 </button>
+<button mat-icon-button color="warn"
+style="float: right; background-color: white;" (click)="deleteSelectedBooks()">
+    <mat-icon>delete</mat-icon>
+</button>
+
+
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
   <ng-container>
     <mat-icon>add</mat-icon>
