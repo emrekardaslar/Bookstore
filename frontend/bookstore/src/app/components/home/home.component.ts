@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'author', 'price', 'amount', 'action'];
   dataSource: any = new MatTableDataSource<Book>(this.books);
   checkedRows: any[] = [];
+  selectAllButton = 'check_box_outline_blank';
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
               this.dataSource.paginator =  this.paginator;
               this.dataSource.sort = this.sort;
               this.checkedRows = [];
+              this.selectAllButton = 'check_box_outline_blank';
             });
           }
         );
@@ -69,12 +71,14 @@ export class HomeComponent implements OnInit {
   }
 
   selectAllWithToggle() {
-    if (this.checkedRows.length == this.books.length) {
+    if (this.selectAllButton == 'check_box') {
+      this.selectAllButton = 'check_box_outline_blank';
       this.checkedRows = [];
-    } else {
+    }
+    else {
+      this.selectAllButton = 'check_box';
       this.checkedRows = this.books.map(book => book.id);
     }
-    //TODO add visual update on checkboxes
   }
 
   deleteBook(id: number) {
@@ -82,6 +86,7 @@ export class HomeComponent implements OnInit {
     if (res == true) 
       this.bookService.deleteBook(id).subscribe(() => {
         this.books = this.books.filter(book => book.id !== id);
+        this.selectAllButton = 'check_box_outline_blank';
         this.dataSource = new MatTableDataSource<Book>(this.books);
         this.dataSource.paginator =  this.paginator;
         this.dataSource.sort = this.sort;
