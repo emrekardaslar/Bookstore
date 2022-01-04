@@ -14,7 +14,9 @@ export class AddBookDialogComponent implements OnInit {
     name: ['', Validators.required],
     author: ['', Validators.required],
     price: ['', Validators.required],
-    amount: ['', Validators.required]
+    amount: ['', Validators.required],
+    description: ['', Validators.required],
+    imgPath: ['', Validators.required]
   })
 
   ngOnInit(): void {

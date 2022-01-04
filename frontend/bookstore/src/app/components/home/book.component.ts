@@ -8,11 +8,11 @@ import { BookService } from 'src/app/services/book.service';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-book',
+  templateUrl: './book.component.html',
+  styleUrls: ['./book.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class BookComponent implements OnInit {
   books: Book[] = [];
   displayedColumns: string[] = ['id', 'name', 'author', 'price', 'amount', 'action'];
   dataSource: any = new MatTableDataSource<Book>(this.books);
@@ -130,3 +130,5 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+//TODO: create a new generic component for table

@@ -14,15 +14,18 @@ public class Book {
     private String author;
     private double price = 0;
     private int amount = 0;
+    private String description;
+    private String imgPath;
 
     public Book() {
     }
 
-    public Book(Long id, String name, String author, double price) {
+    public Book(Long id, String name, String author, double price, String description) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.price = price;
+        this.description = description;
     }
 
     public Long getId() {
@@ -63,5 +66,21 @@ public class Book {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

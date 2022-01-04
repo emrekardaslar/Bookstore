@@ -19,6 +19,16 @@
         <input type="number" matInput formControlName="amount" />
     </mat-form-field>
     <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Image</mat-label>
+        <input type="text" matInput formControlName="imgPath" />
+    </mat-form-field>
+    <br>
     <div style="float: right">
         <button *ngIf="!isEdit" mat-raised-button color="primary" class="btn" [disabled]="!bookForm.valid" >Add</button> 
         <button *ngIf="isEdit" mat-raised-button color="primary" class="btn" [disabled]="!bookForm.valid" >Save</button>

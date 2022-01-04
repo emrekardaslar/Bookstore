@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { HomeComponent } from './components/home/home.component';
+import { BookComponent } from './components/home/book.component';
 import { BookService } from './services/book.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
@@ -27,16 +27,20 @@ import { MatInputModule } from '@angular/material/input';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CustomersComponent } from './components/customers/customers.component';
 import { AddCustomerDialogComponent } from './components/add-customer-dialog/add-customer-dialog.component';
+import { StoreComponent } from './components/store/store.component';
+import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    BookComponent,
     MainNavComponent,
     MatConfirmDialogComponent,
     AddBookDialogComponent,
     CustomersComponent,
-    AddCustomerDialogComponent
+    AddCustomerDialogComponent,
+    StoreComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { AddCustomerDialogComponent } from './components/add-customer-dialog/add
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [BookService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
