@@ -30,6 +30,7 @@ import { AddCustomerDialogComponent } from './components/add-customer-dialog/add
 import { StoreComponent } from './components/store/store.component';
 import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AddBookDialogComponent,
     CustomersComponent,
     AddCustomerDialogComponent,
-    StoreComponent
+    StoreComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

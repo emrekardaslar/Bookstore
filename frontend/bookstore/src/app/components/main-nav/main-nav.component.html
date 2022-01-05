@@ -8,6 +8,8 @@
       <a style="color: white" mat-list-item routerLink="/store">Store</a>
       <a style="color: white" mat-list-item routerLink="/books">Books</a>
       <a style="color: white" mat-list-item routerLink="/customers">Customers</a>
+      <a style="color: white" mat-list-item routerLink="/orders">Orders</a>
+      <a style="color: white" mat-list-item routerLink="/cart" >Cart</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,6 +23,10 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Bookstore</span>
+      <button class="cart-btn" mat-icon-button (click)="openCart()">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
