@@ -1,9 +1,9 @@
 package com.emre.bookstore.cart;
 
 import com.emre.bookstore.book.Book;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table
@@ -11,19 +11,19 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(columnDefinition = "jsonb")
     private Book[] books;
-    private BigDecimal total;
+    private double total;
+    @Column(name = "customer_id", nullable = false, unique = true)
     private Long customerId;
 
     public Cart() {
     }
 
-    public Cart(Long id, Book[] books, BigDecimal total) {
+    public Cart(Long id, Book[] books, double total, Long customerId) {
         this.id = id;
         this.books = books;
         this.total = total;
+        this.customerId = customerId;
     }
 
     public Long getId() {
@@ -42,11 +42,19 @@ public class Cart {
         this.books = books;
     }
 
-    public BigDecimal getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(double total) {
         this.total = total;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }

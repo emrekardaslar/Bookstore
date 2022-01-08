@@ -1,5 +1,5 @@
 <div  fxLayout ="row">
-    <mat-card class="example-card" *ngFor="let book of books" >
+    <mat-card class="example-card" *ngFor="let book of books; let i=index" >
         <mat-card-header>
             <mat-card-title>{{book.name}}</mat-card-title>
             <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
@@ -10,8 +10,13 @@
                 {{book.description}}
             </p>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary" class="btn">
+        <mat-card-actions class="bottom">
+            <!-- show price -->
+            <span class="price">{{book.price}} $</span>
+            <mat-form-field class="quantity">
+                <input matInput type="number" min="0" max="10" [(ngModel)]="quantities[i]" placeholder="Quantity">
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="btn" (click)="addToCart(book, quantities[i])">
                 Add to Cart
             </button>
           </mat-card-actions>

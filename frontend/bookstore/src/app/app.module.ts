@@ -28,7 +28,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CustomersComponent } from './components/customers/customers.component';
 import { AddCustomerDialogComponent } from './components/add-customer-dialog/add-customer-dialog.component';
 import { StoreComponent } from './components/store/store.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CartComponent } from './components/cart/cart.component';
 
@@ -65,7 +65,7 @@ import { CartComponent } from './components/cart/cart.component';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [BookService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
