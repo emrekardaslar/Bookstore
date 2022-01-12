@@ -1,16 +1,21 @@
 package com.emre.bookstore.cart;
 
 import com.emre.bookstore.book.Book;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
 @Entity
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Table
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
     private Book[] books;
     private double total;
     @Column(name = "customer_id", nullable = false, unique = true)
