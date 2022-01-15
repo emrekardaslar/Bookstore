@@ -1,9 +1,8 @@
-<!-- show cart -->
 <div class="cart" *ngIf="cart">
     <div class="cart-header">
         <h3>Shopping Cart</h3>
         <div class="cart-count">
-            <span>{{cart.books.length}}</span>
+            <span>Total Books: {{cart.books.length}}</span>
         </div>
     </div>
     <div class="cart-body">
@@ -13,8 +12,10 @@
             </div>
             <div class="cart-item-info">
                 <h4>{{item.name}}</h4>
-                <p>{{item.price}} $</p>
-               <!--  <p>{{item.quantity}}</p> -->
+                <p>{{item.price * item.amount}} $</p>
+                <mat-form-field class="quantity">
+                    <input matInput type="number" min="0" max="item.amount" [(ngModel)]="item.amount" placeholder="Quantity" >
+                </mat-form-field>
             </div>
             <div class="cart-item-remove">
                 <button mat-raised-button color="warn" (click)="removeFromCart(item)">
@@ -25,7 +26,7 @@
     </div>
     <div class="cart-footer">
         <div class="cart-total">
-            <span>Total: {{cart.total}} $</span>
+            <span>Total: {{getTotal()}} $</span>
         </div>
         <div class="cart-checkout">
             <button mat-raised-button color="primary" (click)="checkout()">

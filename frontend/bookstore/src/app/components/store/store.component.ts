@@ -28,15 +28,27 @@ export class StoreComponent implements OnInit {
   }
 
   addToCart(book: Book, quantity: number) {
-    console.log(quantity)
     this.cartService.getCart(this.customerId).subscribe(cart => {
       if (cart) {
-        cart.books.push(book);
-        cart.total = cart.total + book.price*quantity;
+       if (cart.books.find(b => b.id === book.id)) {
+         cart.books.forEach(b => {
+            if (b.id === book.id) {
+              b.amount += quantity;
+            }
+          });
+       }
+        else {
+          cart.books.push(book);
+          cart.books.forEach(b => {
+            if (b.id === book.id) {
+              b.amount = quantity;
+            }
+          });
+        }
+        cart.total = cart.total + book.price * quantity;
         this.cartService.updateCart(cart).subscribe(cart => {
           this.cart = cart;
         });
-        console.log(cart);
       } else {
         const cart: Cart = {
           id: 0,
@@ -44,7 +56,6 @@ export class StoreComponent implements OnInit {
           books: [book],
           customerId: this.customerId
         };
-        console.log(cart);
         this.cartService.addToCart(cart).subscribe(cart => {
           this.cart = cart;
         });

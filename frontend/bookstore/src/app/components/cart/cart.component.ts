@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book.model';
 import { Cart } from 'src/app/models/cart.model';
+import { BookService } from 'src/app/services/book.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
   customerId: number = 1
-  cart: Cart | any;
-  constructor(private cartService: CartService) { }
+  cart: Cart | any;   
+  constructor(private cartService: CartService, 
+    private bookService: BookService) { }
 
   ngOnInit(): void {
     this.cartService.getCart(this.customerId).subscribe(cart => {
@@ -34,6 +36,17 @@ export class CartComponent implements OnInit {
     });
   }
 
+  getTotal() {
+    let total = 0;
+    if (this.cart) {
+      this.cart.books.forEach((book: Book) => {
+        total += book.price * book.amount;
+      });
+    }
+    return total;
+  }
+
+
   updateCart(book: Book, quantity: number) {
     this.cartService.getCart(this.customerId).subscribe(cart => {
       cart.books = cart.books.filter(b => b.id !== book.id);
@@ -46,8 +59,19 @@ export class CartComponent implements OnInit {
     });
   }
 
+  
+
   checkout() {
-    //checkout
+    //TODO: implement checkout
+    //TODO: subtract books from stock
+    this.cartService.getCart(this.customerId).subscribe(cart => {
+      cart.books = [];
+      cart.total = 0;
+      this.cartService.updateCart(cart).subscribe(cart => {
+        this.cart = cart;
+      }
+    );
+    });
   }
 
 }

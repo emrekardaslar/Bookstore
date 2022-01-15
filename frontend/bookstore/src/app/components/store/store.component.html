@@ -16,7 +16,7 @@
             <mat-form-field class="quantity">
                 <input matInput type="number" min="0" max="10" [(ngModel)]="quantities[i]" placeholder="Quantity">
             </mat-form-field>
-            <button mat-raised-button color="primary" class="btn" (click)="addToCart(book, quantities[i])">
+            <button mat-raised-button color="primary" class="btn" (click)="addToCart(book, quantities[i])" [disabled]="quantities[i] == 0">
                 Add to Cart
             </button>
           </mat-card-actions>
