@@ -25,6 +25,11 @@ public class BookController {
         return new ResponseEntity<>(bookService.getBooks(), HttpStatus.OK);
     }
 
+    @GetMapping(path = "{bookId}")
+    public ResponseEntity<Book> getBook(@PathVariable("bookId") Long bookId){
+        return new ResponseEntity<Book>(bookService.getBook(bookId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return new ResponseEntity<Book>(bookService.addBook(book), HttpStatus.OK);

@@ -63,15 +63,21 @@ export class CartComponent implements OnInit {
 
   checkout() {
     //TODO: implement checkout
-    //TODO: subtract books from stock
+    this.cart.books.forEach((book: any) => {
+      this.bookService.getBook(book.id).subscribe(bookFromDb => {
+        bookFromDb.amount = bookFromDb.amount - book.amount;
+        this.bookService.updateBook(bookFromDb).subscribe();
+      });
+    });
+
     this.cartService.getCart(this.customerId).subscribe(cart => {
       cart.books = [];
       cart.total = 0;
       this.cartService.updateCart(cart).subscribe(cart => {
         this.cart = cart;
       }
-    );
-    });
+      );
+    }); 
   }
 
 }

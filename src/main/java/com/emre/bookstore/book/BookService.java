@@ -20,6 +20,13 @@ public class BookService {
     }
 
 
+    public Book getBook(Long id) {
+        boolean exists = bookRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("book with id " + " does not exists");
+        }
+        return bookRepository.findBookById(id);
+    }
     public Book addBook(Book book) {
         Optional<Book> bookOptional = bookRepository.findBookByName(book.getName());
         if (bookOptional.isPresent()) {
