@@ -1,17 +1,17 @@
 package com.emre.bookstore.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
     private final CustomerRepository customerRepository;
 
     @Autowired
@@ -52,5 +52,10 @@ public class CustomerService {
         newCustomer.setId(customerId);
         customerRepository.save(newCustomer);
         return customerRepository.findById(customerId);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

@@ -3,16 +3,21 @@ package com.emre.bookstore.customer;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table
-public class Customer {
+public class Customer implements UserDetails{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String username;
     private LocalDate dob;
     private String email;
+    private String password;
     @Transient
     private Integer age;
 
@@ -52,6 +57,26 @@ public class Customer {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -78,6 +103,19 @@ public class Customer {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
