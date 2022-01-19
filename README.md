@@ -3,7 +3,7 @@
 Backend:
 
 ```
-build jar file using maven install
+mvn install -DskipTests
 ```
 Frontend:
 ```
